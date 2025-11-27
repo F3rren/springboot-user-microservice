@@ -2,14 +2,8 @@ package com.usermicroservice.users.DTO;
 
 import com.usermicroservice.users.Models.User;
 
-/**
- * Mapper per convertire tra Entity User e DTO
- */
 public class UserMapper {
     
-    /**
-     * Converte UserRequestDTO in User entity
-     */
     public static User toEntity(UserRequestDTO dto) {
         if (dto == null) {
             return null;
@@ -25,9 +19,6 @@ public class UserMapper {
         return user;
     }
     
-    /**
-     * Converte User entity in UserResponseDTO
-     */
     public static UserResponseDTO toResponseDTO(User user) {
         if (user == null) {
             return null;
@@ -42,10 +33,7 @@ public class UserMapper {
             user.getDataCreazione()
         );
     }
-    
-    /**
-     * Aggiorna un'entità User esistente con i dati del DTO
-     */
+
     public static void updateEntityFromDTO(User user, UserRequestDTO dto) {
         if (user == null || dto == null) {
             return;
