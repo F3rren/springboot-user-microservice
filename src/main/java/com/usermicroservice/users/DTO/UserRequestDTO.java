@@ -1,77 +1,43 @@
-package com.usermicroservice.users.Models;
+package com.usermicroservice.users.DTO;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
-
-@Entity
-@Table(name = "users")
-public class User {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    @JsonProperty("username")
+/**
+ * DTO per le richieste di creazione e aggiornamento utente
+ */
+public class UserRequestDTO {
     
     @NotBlank(message = "Username non può essere vuoto")
     private String username;
 
-    @Column(nullable = false, unique = true)
-    @JsonProperty("email")
     @Email(message = "Email non valida")
     @NotBlank(message = "Email è obbligatoria")
     private String email;
 
-    @Column(nullable = false)
-    @JsonProperty("password")
     @NotBlank(message = "Password è obbligatoria")
     @Size(min = 8, message = "Password deve avere almeno 8 caratteri")
     private String password;
     
-    @Column(nullable = false)
-    @JsonProperty("nome")
     @NotBlank(message = "Nome è obbligatorio")
     private String nome;
 
-    @Column(nullable = false)
-    @JsonProperty("cognome")
     @NotBlank(message = "Cognome è obbligatorio")
     private String cognome;
 
-    @CreationTimestamp
-    @Column(nullable = false)
-    private LocalDateTime dataCreazione;
+    // Costruttori
+    public UserRequestDTO() {}
 
-    public User() {
-    }
-
-    public User(Long id, String username, String email, String password, String nome, String cognome,
-            LocalDateTime dataCreazione) {
-        this.id = id;
+    public UserRequestDTO(String username, String email, String password, String nome, String cognome) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
-        this.dataCreazione = dataCreazione;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    // Getters e Setters
     public String getUsername() {
         return username;
     }
@@ -111,13 +77,4 @@ public class User {
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
-
-    public LocalDateTime getDataCreazione() {
-        return dataCreazione;
-    }
-
-    public void setDataCreazione(LocalDateTime dataCreazione) {
-        this.dataCreazione = dataCreazione;
-    }
-
 }
